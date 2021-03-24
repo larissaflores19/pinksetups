@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Pinksetup
+from .models import PinkSetup, Favorites
 
 # Register your models here.
 
-admin.site.register(Pinksetup)
+admin.site.register(PinkSetup)
+admin.site.register(Favorites)

@@ -1,23 +1,30 @@
 from django.db import models
-import datetime
-from django.utils import timezone
+from django.db.models import TextField, ForeignKey, Model, ImageField, CharField
+from django.forms import ChoiceField
 
-# Create your models here.
+VOTE_CHOICE = (
+    ("1", "One"),
+    ("2", "Two"),
+    ("3", "Three"),
+    ("4", "Four"),
+    ("5", "Five"),
+)
 
 
-class Pinksetup(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    image = models.ImageField(null=True, blank=True)
+class PinkSetup(Model):
+    name = CharField(default='', max_length=200)
+    description = TextField(blank=True)
+    image = ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
 class Favorites(models.Model):
-    all_text = models.ForeignKey(Pinksetup, on_delete=models.CASCADE)
-    favorite_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+    item = ForeignKey(PinkSetup, on_delete=models.CASCADE)
+    comment = TextField(blank=True)
+    vote = ChoiceField(choices=VOTE_CHOICE)
 
     def __str__(self):
-        return self.favorite_text
+        return self.comment
+

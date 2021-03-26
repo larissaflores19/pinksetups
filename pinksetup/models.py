@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models import TextField, ForeignKey, Model, ImageField, CharField
 from django.forms import ChoiceField
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 VOTE_CHOICE = (
     ("1", "One"),
@@ -27,4 +29,19 @@ class Favorites(models.Model):
 
     def __str__(self):
         return self.comment
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=250)
+    content = models.TextField()
+    slug = models.SlugField(max_length=250)
+    likes = models.ManyToManyField(
+        User, related_name="like", default=None, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('pinksetup:post_single', args=[self.slug])
+
+    def __str__(self):
+        return self.title
+
 

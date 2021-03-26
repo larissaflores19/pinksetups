@@ -28,14 +28,14 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All</a>
+                        <a class="nav-link" href="posts">Posts</a>
                     </li>
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link active " href="#" tabindex="-1" aria-disabled="true">Favourites</a>
-                    </li>
+                    </li>-->
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -107,7 +107,7 @@
                 </div>
                 <h2>{{ item.name }}</h2>
                 <p>{{ item.description }}</p>
-                <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
+                <p><a class="btn btn-secondary" href="pinksetup_detail/{{ item.id }}">View details &raquo;</a></p>
             </div>
             {% endfor %}
         </div>
@@ -120,6 +120,7 @@
                 <h2 class="featurette-heading">D.Va / Overwatch. <span
                         class="text-muted">Premium Statue.</span></h2>
                 <p class="lead">D.Va’s mech is nimble and powerful—its twin Fusion Cannons blast away with autofire at short range, and she can use its Boosters to barrel over enemies and obstacles, or deflect attacks with her projectile-dismantling Defense Matrix.</p>
+                <p class="lead">akakkakakakaka</p>
             </div>
             <div class="col-md-5">
                     <img src="/static/images/d.va.jpg" class="d-block w-100" alt="">

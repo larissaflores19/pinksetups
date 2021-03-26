@@ -1,12 +1,10 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
-from pinksetup.models import PinkSetup
-from pinksetup.models import Favorites
+from pinksetup.models import PinkSetup, Post
 from pinksetup.utils.model_testing import get_model_fields
 
 
 class TestPinkSetupModels(TestCase):
-    # testModelName (camel case)
-    # test_model_name (snake case)
 
     def test_model_name_str(self):
         pink_setup = PinkSetup.objects.create(name='Name Testing')
@@ -23,13 +21,12 @@ class TestPinkSetupModels(TestCase):
         self.assertEqual(fields.get('description'), DESCRIPTION)
         self.assertEqual(fields.get('image'), None)
 
-
-class TestFavoriteModel(TestCase):
-    pass
-    # def test_model_item_text(self):
-    #     item_text = Favorites.objects.create(item_text='')
-    #     self.assertEqual(str(item_text), '')
-    #
-    # def test_model_comment_text(self):
-    #     comment_text = Favorites.objects.create(comment_text='')
-    #     self.assertEqual(str(comment_text), '')
+    def test_post_like_users(self):
+        testusers = User.objects.create_user(
+            username='testuser', password='12345')
+        testusers2 = User.objects.create_user(
+            username='testuser2', password='12345')
+        title = Post.objects.create(
+            title='test', content='New Content')
+        title.likes.set([testusers.pk, testusers2.pk])
+        self.assertEqual(title.likes.count(), 2)

@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
+from pprint import pprint
+
 from django.test import TestCase
 from pinksetup.models import PinkSetup, Post
 from pinksetup.utils.model_testing import get_model_fields
+from model_bakery import baker
 
 
 class TestPinkSetupModels(TestCase):
@@ -21,12 +23,14 @@ class TestPinkSetupModels(TestCase):
         self.assertEqual(fields.get('description'), DESCRIPTION)
         self.assertEqual(fields.get('image'), None)
 
-    def test_post_like_users(self):
-        testusers = User.objects.create_user(
-            username='testuser', password='12345')
-        testusers2 = User.objects.create_user(
-            username='testuser2', password='12345')
-        title = Post.objects.create(
-            title='test', content='New Content')
-        title.likes.set([testusers.pk, testusers2.pk])
-        self.assertEqual(title.likes.count(), 2)
+
+class TestNew(TestCase):
+    def setUp(self):
+        self.post = baker.make('pinksetup.Post')
+        pprint(self.post.__dict__)
+
+    def test_model_str(self):
+        title = Post.objects.create(title='django test')
+        content = Post.objects.create(content='this is some content')
+        self.assertEqual(str(title), 'django test')
+

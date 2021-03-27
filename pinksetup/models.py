@@ -14,7 +14,7 @@ VOTE_CHOICE = (
 
 
 class PinkSetup(Model):
-    name = CharField(default='', max_length=200)
+    name = CharField(default='', max_length=250)
     description = TextField(blank=True)
     image = ImageField(null=True, blank=True)
 
